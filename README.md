@@ -12,12 +12,15 @@
 curl {API_ENDPOINT} \
 -H "Content-type:application/json;charset=utf-8" \
 -d '{YOUR_REQUEST_BODY}'
+```
 
 使用时需要修改服务器中php.ini文件的设置，开启PHP的curl服务。
+
 
 ## 配置公私钥
 
 示例代码中的公私钥配置在```llpay.config.php```中， 请仔细阅读[连连开放平台-配置公私钥](https://zealous-kare-7abde4.netlify.com/docs/development/signature-key-generation)， 依据文档配置商户公私钥与连连提供的公钥。
+
 
 ## 付款申请API
 
