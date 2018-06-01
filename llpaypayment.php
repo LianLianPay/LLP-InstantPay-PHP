@@ -1,32 +1,13 @@
-# LLP-InstantPay-PHP
+﻿<?php
 
-欢迎来到连连实时付款的PHP仓库， 本仓库包含PHP接入的示例代码及必要的说明。
 
-> 建议使用的PHP版本为[5.6](http://php.net/downloads.php#v5.6.36)或5.6以上。
-
-## HTTP请求说明
-
-连连统一要求在请求连连提供的接口时使用以下的格式:
-
-```text
-curl {API_ENDPOINT} \
--H "Content-type:application/json;charset=utf-8" \
--d '{YOUR_REQUEST_BODY}'
-
-使用时需要修改服务器中php.ini文件的设置，开启PHP的curl服务。
-
-## 配置公私钥
-
-示例代码中的公私钥配置在```llpay.config.php```中， 请仔细阅读[连连开放平台-配置公私钥](https://zealous-kare-7abde4.netlify.com/docs/development/signature-key-generation)， 依据文档配置商户公私钥与连连提供的公钥。
-
-## 付款申请API
-
-调用付款申请的示例代码如下。组建预处理请求参数后需要对其进行[加密](https://zealous-kare-7abde4.netlify.com/docs/send-money/instant/api-encrypt)生成```pay_load```， 之后直接做HTTP请求即可。
-
-> 请求参数的详细说明见[连连开放平台-付款申请API](https://zealous-kare-7abde4.netlify.com/apis/instant-apply)。
-
-```PHP
-<?php
+/* *
+ * 功能：连连支付实时付款付款申请接口
+ * 版本：1.0
+ * 修改日期：2016-11-28
+ * 说明：
+ * 以下代码只是为了方便商户测试而提供的样例代码，商户可以根据自己网站的需要，按照技术文档编写,并非一定要使用该代码。
+ */
 require_once ("llpay.config.php");
 require_once ("lib/llpay_apipost_submit.class.php");
 require_once ("lib/llpay_security.function.php");
@@ -67,6 +48,9 @@ $api_version = '1.0';
 
 //实时付款交易接口地址
 $llpay_payment_url = 'https://instantpay.lianlianpay.com/paymentapi/payment.htm';
+//需http://格式的完整路径，不能加?id=123这类自定义参数
+
+/************************************************************/
 
 //构造要请求的参数数组，无需改动
 $parameter = array (
@@ -96,10 +80,9 @@ $parameterRequest = array (
 );
 $html_text = $llpaySubmit->buildRequestJSON($parameterRequest,$llpay_payment_url);
 //调用付款申请接口，同步返回0000，是指创建连连支付单成功，订单处于付款处理中状态，最终的付款状态由异步通知告知
-//出现1002，2005，4006，4007，4009，9999这6个返回码时或者没返回码，抛exception（或者对除了0000之后的code都查询一遍查询接口）调用付款结果查询接口，明确订单状态，不能私自设置订单为失败状态，以免造成这笔订单在连连付款成功了，而商户设置为失败,用户重新发起付款请求,造成重复付款，商户资金损失
+//出现1002，2005，4006，4007，4009，9999这6个返回码时或者没返回码，抛exception（或者对除了0000之后的code都查询一遍查询接口）调用付款结果查询接口，明确订单状态，不能私自设置订单为失败状态，以免造成这笔订单在连连付款成功了，
+//而商户设置为失败,用户重新发起付款请求,造成重复付款，商户资金损失
 
 //对连连响应报文内容需要用连连公钥验签
 echo $html_text;
 ?>
-
-```
