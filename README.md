@@ -19,14 +19,14 @@ curl {API_ENDPOINT} \
 
 ## 配置公私钥
 
-示例代码中的公私钥配置在```llpay.config.php```中， 请仔细阅读[连连开放平台-配置公私钥](https://zealous-kare-7abde4.netlify.com/docs/development/signature-key-generation)， 依据文档配置商户公私钥与连连提供的公钥。
+示例代码中的公私钥配置在```llpay.config.php```中， 请仔细阅读[连连开放平台-配置公私钥](https://open.lianlianpay-inc.com/docs/development/signature-key-generation)， 依据文档配置商户公私钥与连连提供的公钥。
 
 
 ## 付款申请API
 
-调用付款申请的示例代码如下。组建预处理请求参数后需要对其进行[加密](https://zealous-kare-7abde4.netlify.com/docs/send-money/instant/api-encrypt)生成```pay_load```， 之后直接做HTTP请求即可。
+调用付款申请的示例代码如下。组建预处理请求参数后需要对其进行[加密](https://open.lianlianpay-inc.com/docs/send-money/instant/api-encrypt)生成```pay_load```， 之后直接做HTTP请求即可。
 
-> 请求参数的详细说明见[连连开放平台-付款申请API](https://zealous-kare-7abde4.netlify.com/apis/instant-apply)。
+> 请求参数的详细说明见[连连开放平台-付款申请API](https://open.lianlianpay-inc.com/apis/instant-apply)。
 
 ```PHP
 <?php
